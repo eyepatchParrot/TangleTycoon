@@ -16,17 +16,17 @@ combining the default cpp stream and handling foo.h separately.
 void hello_world();
 ```
 
-```cpp stream=impl name=impl-body dep=impl-def
+```cpp stream=impl name=body dep=def
     std::cout << "Hello world\n";
 }
 ```
 
-```cpp stream=impl name=impl-inc
+```cpp stream=impl name=inc
 #include "foo.h"
 #include <iostream>
 ```
 
-```cpp stream=impl name=impl-def dep=impl-inc
+```cpp stream=impl name=def dep=inc
 void hello_world() {
 ```
 

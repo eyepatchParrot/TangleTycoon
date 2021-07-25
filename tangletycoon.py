@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 from sys import stdin
 import fire
-from logging import error
 
-
+##############################################################################
 def code_blocks(text):
     return (block(i, e) for i, e in enumerate(text.split("```")) if i % 2 == 1)
 
@@ -67,19 +66,30 @@ def tangle(force=False, **streams):
     stream_blocks = {}
     for block in code_blocks(stdin.read()):
         stream_blocks.setdefault(block["stream"], []).append(block)
-    if not force:
-        assert streams.keys() == stream_blocks.keys()
+    if force:
+        for key in list(stream_blocks.keys()):
+            if key not in streams:
+                del stream_blocks[key]
+    assert streams.keys() == stream_blocks.keys()
     for stream, blocks in stream_blocks.items():
         with open(streams[stream], "w") as f:
             f.write("".join(
                 [blocks[i]["content"] for i in blocks_order(blocks)]))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################################################
 if __name__ == '__main__':
     fire.Fire(tangle)
-
-# Include both dependencies and reverse dependencies so that when a new
-# snippet is encountered, you can identify all of the ones which have
-# come before.  Each one should include a number indicating when it came
-# in the file.
-# lang stream name dep...

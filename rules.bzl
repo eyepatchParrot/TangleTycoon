@@ -5,7 +5,7 @@ def tangle_tycoon(name, srcs, streams):
             "--{} $(location :{})".format(stream, out)
             for stream, out in streams.items()
         ]),
-        srcs = ["hello-world.md"],
+        srcs = srcs,
         tools = ["tangletycoon.py"],
         outs = streams.values(),
     )
