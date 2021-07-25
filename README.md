@@ -39,7 +39,9 @@ To Do
 
 1. Add macros
 2. Handle recursion with a visited set and error.
-3. Handle keyword arguments. Positional arguments are in a fixed order, so track which is the next remaining one, and use that one.
+3. Handle positional arguments. Positional arguments are in a fixed order, so track which is the next remaining one, and use that one.
+lang is an exception, which is always positional.
+4. Namespace names by stream
 
 I don't think that I actually need macros. Languages already have mechanisms for duplicating code. I can instead have 3 items:
 
@@ -51,6 +53,16 @@ So, the header is `lang stream name dep...`
 
 If we make sure that resolution of dependencies happens in file order, then the case where nothing is specified results in a file per language in order.
 
+### Additional test cases
+```  cpp
+int main() {
+    return 0
+}
+```
+
+```stream:foo.txt 
+int 
+```
 
 Design decisions
 ----------------
@@ -115,3 +127,4 @@ Alternatives considered
 - [Pweave]()
 - [Sweave]()
 - [NanoLP]()
+

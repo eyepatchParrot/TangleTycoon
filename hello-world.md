@@ -12,17 +12,22 @@ combining the default cpp stream and handling foo.h separately.
 #include "foo.h"
 ```
 
-```cpp header
+```cpp stream=header
 void hello_world();
 ```
 
-```cpp impl
-#include "foo.h"
-
-#include <iostream>
-void hello_world() {
+```cpp stream=impl name=impl-body dep=impl-def
     std::cout << "Hello world\n";
 }
+```
+
+```cpp stream=impl name=impl-inc
+#include "foo.h"
+#include <iostream>
+```
+
+```cpp stream=impl name=impl-def dep=impl-inc
+void hello_world() {
 ```
 
 Something we want to ensure happens is that indenting is handled
@@ -35,7 +40,6 @@ this is a generic code block
 ```
 
 ```python
-### abc ###
 print("Hello world")
 ```
 
